@@ -65,9 +65,9 @@ export async function GET() {
     zip.file(filename, content);
   }
 
-  const zipBuffer = await zip.generateAsync({ type: "nodebuffer" });
+  const zipBuffer = await zip.generateAsync({ type: "arraybuffer" });
 
-  return new NextResponse(zipBuffer as unknown as BodyInit, {
+  return new NextResponse(zipBuffer, {
     headers: {
       "Content-Type": "application/zip",
       "Content-Disposition": `attachment; filename="diary-export-${new Date().toISOString().split("T")[0]}.zip"`,

@@ -67,7 +67,6 @@ export function EntryForm({ initialEntry }: Props) {
     }
 
     router.push("/dashboard");
-    router.refresh();
   };
 
   return (

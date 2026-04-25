@@ -6,9 +6,9 @@ import type { Entry } from "@/types";
 export default async function WritePage({
   searchParams,
 }: {
-  searchParams: Promise<{ edit?: string }>;
+  searchParams: { edit?: string };
 }) {
-  const { edit: entryId } = await searchParams;
+  const { edit: entryId } = searchParams;
   let initialEntry: Entry | null = null;
 
   if (entryId) {

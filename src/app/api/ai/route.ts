@@ -49,15 +49,19 @@ Entries:
 ${context}`,
   });
 
-  result.object.then(async (insights) => {
-    if (entryId) {
-      await supabase
-        .from("entries")
-        .update({ ai_insights: insights })
-        .eq("id", entryId)
-        .eq("user_id", user.id);
-    }
-  });
+  result.object
+    .then(async (insights) => {
+      if (entryId) {
+        await supabase
+          .from("entries")
+          .update({ ai_insights: insights })
+          .eq("id", entryId)
+          .eq("user_id", user.id);
+      }
+    })
+    .catch(() => {
+      // Stream error — insights not persisted, client already received error via stream
+    });
 
   return result.toTextStreamResponse();
 }
